@@ -8,12 +8,18 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
+  app.enableCors({
+    origin: "http://localhost:5173", 
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('API Productos')
     .setDescription('CRUD de productos con NestJS y MongoDB')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
